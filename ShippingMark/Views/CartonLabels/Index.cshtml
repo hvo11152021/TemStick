@@ -1,0 +1,131 @@
+﻿@model IEnumerable<ShippingMark.Models.CartonLabel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<p class="text-danger">@TempData["Message"]</p>
+<p class="text-success">@TempData["Success"]</p>
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <form asp-action="DownloadLabels" asp-controller="CartonLabels" method="post" enctype="multipart/form-data">
+                    <h5 class="card-title">Get Labels</h5>
+                    <p class="card-text">Download the entire page into a customized excel spreadsheet.</p>
+                    <input type="submit" value="Download" class="btn btn-primary" />
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <form asp-action="InsertFromExcel" asp-controller="CartonLabels" method="post" enctype="multipart/form-data">
+                    <h5 class="card-title">Upload Excel File:</h5>
+                    <p class="card-text">
+                        <input type="file" class="" name="theExcel" />     <a href="~/example_excel/upload_template.xlsx">View Upload Template</a>
+                    </p>
+                    <input type="submit" value="Upload Data ↑" class="btn btn-success" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid d-block d-lg-none">
+    <div class="card-deck-wrapper">
+        <div class="card-deck">
+            @foreach (var item in Model)
+            {
+                <div class="card mb-sm-3" style="min-width: 18rem;">
+                    <h5 class="card-header"><strong>@Html.DisplayFor(modelItem => item.Brand)</strong></h5>
+                    <div class="card-body">
+                        <div class="media-body ml-2">
+                            <p class="card-text">
+                                <strong>Carton Number:</strong> @Html.DisplayFor(modelItem => item.CartonNumber)<br />
+                                <strong>Buyer Carton Number:</strong> @Html.DisplayFor(modelItem => item.BuyerCartonNumber)<br />
+                                <strong>Description:</strong> @Html.DisplayFor(modelItem => item.Description)<br />
+                            </p>
+                            <div class="card-footer">
+                                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CartonNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BuyerCartonNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StylePPJ)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ColorName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CartonNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BuyerCartonNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StylePPJ)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Brand)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ColorName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<form asp-action="DeleteAll" asp-controller="CartonLabels">
+    <div class="d-none d-lg-block">
+        <button type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure? This will delete all checked users')">
+            <i class="fa fa-trash-o"></i> Delete
+        </button>
+    </div>
+</form>
