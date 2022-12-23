@@ -8,7 +8,7 @@ using ShippingMark.Data;
 namespace ShippingMark.Data.SPMigrations
 {
     [DbContext(typeof(ShippingContext))]
-    [Migration("20221223142531_Initial")]
+    [Migration("20221223212345_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

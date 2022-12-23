@@ -59,7 +59,7 @@ namespace ShippingMark.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,CartonNumber,BuyerCartonNumber,StylePPJ,Brand,Description,Fab,ColorName,Col00,Col0,Col1,Col2,Col3,Col4,Col5,Col6,Col8,Col10,Col12,Col14,Col16,Col18,Col20,Col22,Col24,Col26,Col28,Col30,Quantity,TotalQuantity,CartonQuantity,TotalPieces,TotalNetWeight,TotalGrossWeight,DimensionX,DimensionY,DimensionZ")] CartonLabel cartonLabel)
+        public async Task<IActionResult> Create([Bind("ID,CartonNumber,BuyerCartonNumber,StylePPJ,Brand,Description,Fab,ColorName,Col00,Col0,Col1,Col2,Col3,Col4,Col5,Col6,Col8,Col10,Col12,Col14,Col16,Col18,Col20,Col22,Col24,Col26,Col28,Col30,Quantity,TotalQuantity,CartonQuantity,TotalPieces,TotalNetWeight,TotalGrossWeight,Dimension")] CartonLabel cartonLabel)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace ShippingMark.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,CartonNumber,BuyerCartonNumber,StylePPJ,Brand,Description,Fab,ColorName,Col00,Col0,Col1,Col2,Col3,Col4,Col5,Col6,Col8,Col10,Col12,Col14,Col16,Col18,Col20,Col22,Col24,Col26,Col28,Col30,Quantity,TotalQuantity,CartonQuantity,TotalPieces,TotalNetWeight,TotalGrossWeight,DimensionX,DimensionY,DimensionZ")] CartonLabel cartonLabel)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,CartonNumber,BuyerCartonNumber,StylePPJ,Brand,Description,Fab,ColorName,Col00,Col0,Col1,Col2,Col3,Col4,Col5,Col6,Col8,Col10,Col12,Col14,Col16,Col18,Col20,Col22,Col24,Col26,Col28,Col30,Quantity,TotalQuantity,CartonQuantity,TotalPieces,TotalNetWeight,TotalGrossWeight,Dimension")] CartonLabel cartonLabel)
         {
             if (id != cartonLabel.ID)
             {
@@ -262,12 +262,13 @@ namespace ShippingMark.Controllers
                 TempData["Success"] = "Data successfully uploaded!";
                 return RedirectToAction(nameof(Index));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 //uploadMessage = ex.GetBaseException().Message;
                 uploadMessage = "Incorrect column placement or missing columns. " +
                     "Please review the upload format by download the upload guideline on the right. " +
-                    "(Sai vị trí cột hoặc thiếu cột. Vui lòng xem xét hướng dẫn tải lên)";
+                    "(Sai vị trí cột hoặc thiếu cột. Vui lòng xem xét hướng dẫn tải lên) " +
+                    ex.GetBaseException().Message;
                 /*"Failed to import data.  Check that file type is .csv or .xlsx!";*/
             }
             if (String.IsNullOrEmpty(uploadMessage))
