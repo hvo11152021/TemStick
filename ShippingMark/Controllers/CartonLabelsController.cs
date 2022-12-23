@@ -458,7 +458,7 @@ namespace ShippingMark.Controllers
                     package.Save();
                 }
                 stream.Position = 0;
-                string excelName = $"Label-List-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.xlsx";
+                string excelName = $"listToPrint.xlsx";
                 TempData["Success"] = "Data successfully downloaded!";
                 return File(stream, "application/octet-stream", excelName);
             }
