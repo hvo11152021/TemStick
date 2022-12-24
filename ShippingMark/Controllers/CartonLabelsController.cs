@@ -403,9 +403,19 @@ namespace ShippingMark.Controllers
                         workSheet.Cells[startRow + 15, 9].Value = "OF";
                         workSheet.Cells[startRow + 15, 11].Value = labels.Count.ToString().ToUpper();
 
+                        for (int i = 0; i <= 17; i++)
+                        {
+                            workSheet.Cells[startRow + i, 1].Style.Border.Left.Style = ExcelBorderStyle.Medium;
+                        }
+
                         for (int i = 1; i <= 15; i++)
                         {
                             workSheet.Cells[startRow - 1, i].Style.Border.Bottom.Style = ExcelBorderStyle.Medium;
+                        }
+
+                        for (int i = 0; i <= 17; i++)
+                        {
+                            workSheet.Cells[startRow + i, 15].Style.Border.Right.Style = ExcelBorderStyle.Medium;
                         }
 
                         for (int i = 1; i <= 15; i++)
@@ -448,8 +458,8 @@ namespace ShippingMark.Controllers
 
                     workSheet.PrinterSettings.HeaderMargin = 0;
                     workSheet.PrinterSettings.FooterMargin = 0;
-                    workSheet.PrinterSettings.TopMargin = 0.25m;
-                    workSheet.PrinterSettings.LeftMargin = 0.25m;
+                    workSheet.PrinterSettings.TopMargin = 0.34m;
+                    workSheet.PrinterSettings.LeftMargin = 0.3m;
                     workSheet.PrinterSettings.RightMargin = 0.25m;
                     workSheet.PrinterSettings.BottomMargin = 0.25m;
                     workSheet.PrinterSettings.HorizontalCentered = true;
@@ -460,7 +470,7 @@ namespace ShippingMark.Controllers
                 }
                 stream.Position = 0;
                 string excelName = $"listToPrint.xlsx";
-                TempData["Success"] = "Data successfully downloaded!";
+                
                 return File(stream, "application/octet-stream", excelName);
             }
             catch (Exception ex)
