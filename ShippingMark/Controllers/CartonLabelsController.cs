@@ -1,14 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.ConstrainedExecution;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Net.Http.Headers;
 using OfficeOpenXml;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
 using OfficeOpenXml.Style;
 using ShippingMark.Data;
 using ShippingMark.Models;
@@ -27,7 +33,7 @@ namespace ShippingMark.Controllers
         // GET: CartonLabels
         public async Task<IActionResult> Index()
         {
-            return View(await _context.CartonLabels.ToListAsync());
+            return View(await _context.CartonLabels.OrderBy(l => l.BuyerCartonNumber).ToListAsync());
         }
 
         // GET: CartonLabels/Details/5
@@ -59,7 +65,14 @@ namespace ShippingMark.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,CartonNumber,BuyerCartonNumber,StylePPJ,Brand,Description,Fab,ColorName,Col00,Col0,Col1,Col2,Col3,Col4,Col5,Col6,Col8,Col10,Col12,Col14,Col16,Col18,Col20,Col22,Col24,Col26,Col28,Col30,Quantity,TotalQuantity,CartonQuantity,TotalPieces,TotalNetWeight,TotalGrossWeight,Dimension")] CartonLabel cartonLabel)
+        public async Task<IActionResult> Create([Bind("ID,CartonNumber,BuyerCartonNumber, StylePPJ,Brand,Description,Fab,ColorName," +
+            "Col00,Col0,Col1,Col2,Col3,Col4,Col5,Col6,Col7,Col8,Col9,Col10," +
+            "Col11,Col12,Col13,Col14,Col15,Col16,Col17,Col18,Col19,Col20," +
+            "Col21,Col22,Col23,Col24,Col25,Col26,Col27,Col28,Col29,Col30," +
+            "Col31,Col32,Col33,Col34,Col35,Col36,Col37,Col38,Col39,Col40," +
+            "Col41,Col42,Col43,Col44,Col45,Col46,Col47,Col48,Col49,Col50," +
+            "Col51,Col52,Col53,Col54,SizeXS,SizeS,SizeM,SizeL,SizeXL,Size2XL," +
+            "TotalQuantity,CartonQuantity,TotalPieces,TotalNetWeight,TotalGrossWeight,Dimension")] CartonLabel cartonLabel)
         {
             if (ModelState.IsValid)
             {
@@ -91,23 +104,32 @@ namespace ShippingMark.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,CartonNumber,BuyerCartonNumber,StylePPJ,Brand,Description,Fab,ColorName,Col00,Col0,Col1,Col2,Col3,Col4,Col5,Col6,Col8,Col10,Col12,Col14,Col16,Col18,Col20,Col22,Col24,Col26,Col28,Col30,Quantity,TotalQuantity,CartonQuantity,TotalPieces,TotalNetWeight,TotalGrossWeight,Dimension")] CartonLabel cartonLabel)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id != cartonLabel.ID)
+            var labelToUpdate = await _context.CartonLabels.SingleOrDefaultAsync(l => l.ID == id);
+
+            if (labelToUpdate == null)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (await TryUpdateModelAsync(labelToUpdate, "", l => l.CartonNumber, l => l.BuyerCartonNumber, l => l.StylePPJ, l => l.Brand, l => l.Description, l => l.Fab, l => l.ColorName,
+                l => l.Col00, l => l.Col0, l => l.Col1, l => l.Col2, l => l.Col3, l => l.Col4, l => l.Col5, l => l.Col6, l => l.Col7, l => l.Col8, l => l.Col9, l => l.Col10,
+                l => l.Col11, l => l.Col12, l => l.Col13, l => l.Col14, l => l.Col15, l => l.Col16, l => l.Col17, l => l.Col18, l => l.Col19, l => l.Col20,
+                l => l.Col21, l => l.Col22, l => l.Col23, l => l.Col24, l => l.Col25, l => l.Col26, l => l.Col27, l => l.Col28, l => l.Col29, l => l.Col30,
+                l => l.Col31, l => l.Col32, l => l.Col33, l => l.Col34, l => l.Col35, l => l.Col36, l => l.Col37, l => l.Col38, l => l.Col39, l => l.Col40,
+                l => l.Col41, l => l.Col42, l => l.Col43, l => l.Col44, l => l.Col45, l => l.Col46, l => l.Col47, l => l.Col48, l => l.Col49, l => l.Col50,
+                l => l.Col51, l => l.Col52, l => l.Col53, l => l.Col54, l => l.SizeXS, l => l.SizeS, l => l.SizeM, l => l.SizeL, l => l.SizeXL, l => l.Size2XL,
+                l => l.TotalQuantity, l => l.TotalPieces, l => l.TotalNetWeight, l => l.TotalGrossWeight, l => l.Dimension))
             {
                 try
                 {
-                    _context.Update(cartonLabel);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CartonLabelExists(cartonLabel.ID))
+                    if (!CartonLabelExists(labelToUpdate.ID))
                     {
                         return NotFound();
                     }
@@ -116,9 +138,12 @@ namespace ShippingMark.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                catch (DbUpdateException)
+                {
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+                }
             }
-            return View(cartonLabel);
+            return View(labelToUpdate);
         }
 
         // GET: CartonLabels/Delete/5
@@ -213,42 +238,37 @@ namespace ShippingMark.Controllers
                 for (int row = start.Row + 2; row <= end.Row; row++)
                 {
                     // Row by row...
-                    CartonLabel l = new CartonLabel
+                    CartonLabel l = new CartonLabel();
+                    l.CartonNumber = ConvertInput(workSheet.Cells[row, 1].Text);
+                    l.BuyerCartonNumber = ConvertInput(workSheet.Cells[row, 4].Text);
+                    l.StylePPJ = workSheet.Cells[row, 6].Text;
+                    l.Brand = workSheet.Cells[row, 7].Text;
+                    l.Description = workSheet.Cells[row, 8].Text;
+                    l.Fab = workSheet.Cells[row, 9].Text;
+                    l.ColorName = workSheet.Cells[row, 10].Text;
+                    l.Col00 = ConvertInput(workSheet.Cells[row, 11].Text);
+
+                    //using reflection to loop through all properties in one object
+                    for (int p = 0; p <= 54; p++)
                     {
-                        CartonNumber = ConvertInput(workSheet.Cells[row, 1].Text),
-                        BuyerCartonNumber = ConvertInput(workSheet.Cells[row, 4].Text),
-                        StylePPJ = ConvertInput(workSheet.Cells[row, 6].Text),
-                        Brand = workSheet.Cells[row, 7].Text,
-                        Description = workSheet.Cells[row, 8].Text,
-                        Fab = workSheet.Cells[row, 9].Text,
-                        ColorName = workSheet.Cells[row, 10].Text,
-                        Col00 = ConvertInput(workSheet.Cells[row, 11].Text),
-                        Col0 = ConvertInput(workSheet.Cells[row, 12].Text),
-                        Col1 = ConvertInput(workSheet.Cells[row, 13].Text),
-                        Col2 = ConvertInput(workSheet.Cells[row, 14].Text),
-                        Col3 = ConvertInput(workSheet.Cells[row, 15].Text),
-                        Col4 = ConvertInput(workSheet.Cells[row, 16].Text),
-                        Col5 = ConvertInput(workSheet.Cells[row, 17].Text),
-                        Col6 = ConvertInput(workSheet.Cells[row, 18].Text),
-                        Col8 = ConvertInput(workSheet.Cells[row, 19].Text),
-                        Col10 = ConvertInput(workSheet.Cells[row, 20].Text),
-                        Col12 = ConvertInput(workSheet.Cells[row, 21].Text),
-                        Col14 = ConvertInput(workSheet.Cells[row, 22].Text),
-                        Col16 = ConvertInput(workSheet.Cells[row, 23].Text),
-                        Col18 = ConvertInput(workSheet.Cells[row, 24].Text),
-                        Col20 = ConvertInput(workSheet.Cells[row, 25].Text),
-                        Col22 = ConvertInput(workSheet.Cells[row, 26].Text),
-                        Col24 = ConvertInput(workSheet.Cells[row, 27].Text),
-                        Col26 = ConvertInput(workSheet.Cells[row, 28].Text),
-                        Col28 = ConvertInput(workSheet.Cells[row, 29].Text),
-                        Col30 = ConvertInput(workSheet.Cells[row, 30].Text),
-                        TotalQuantity = ConvertInput(workSheet.Cells[row, 31].Text),
-                        CartonQuantity = ConvertInput(workSheet.Cells[row, 32].Text),
-                        TotalPieces = ConvertInput(workSheet.Cells[row, 33].Text),
-                        TotalNetWeight = ConvertDouble(workSheet.Cells[row, 34].Text),
-                        TotalGrossWeight = ConvertDouble(workSheet.Cells[row, 35].Text),
-                        Dimension = workSheet.Cells[row, 36].Text,
-                    };
+                        var prop = typeof(CartonLabel).GetProperty($"Col{p}");
+                        prop.SetValue(l, ConvertInput(workSheet.Cells[row, p + 12].Text), null);
+                    }
+
+                    l.SizeXS = ConvertInput(workSheet.Cells[row, 67].Text);
+                    l.SizeS = ConvertInput(workSheet.Cells[row, 68].Text);
+                    l.SizeM = ConvertInput(workSheet.Cells[row, 69].Text);
+                    l.SizeL = ConvertInput(workSheet.Cells[row, 70].Text);
+                    l.SizeXL = ConvertInput(workSheet.Cells[row, 71].Text);
+                    l.Size2XL = ConvertInput(workSheet.Cells[row, 72].Text);
+
+                    l.TotalQuantity = ConvertInput(workSheet.Cells[row, 73].Text);
+                    l.CartonQuantity = ConvertInput(workSheet.Cells[row, 74].Text);
+                    l.TotalPieces = ConvertInput(workSheet.Cells[row, 75].Text);
+                    l.TotalNetWeight = ConvertDouble(workSheet.Cells[row, 76].Text);
+                    l.TotalGrossWeight = ConvertDouble(workSheet.Cells[row, 77].Text);
+                    l.Dimension = workSheet.Cells[row, 78].Text;
+
                     if (l.TotalQuantity != 0 &&
                         l.CartonQuantity != 0 &&
                         l.TotalPieces != 0 &&
@@ -285,7 +305,7 @@ namespace ShippingMark.Controllers
         // POST: CartonLabels/DownloadLabels
         public IActionResult DownloadLabels()
         {
-            var labels = _context.CartonLabels.ToList();
+            var labels = _context.CartonLabels.OrderBy(l => l.BuyerCartonNumber).ToList();
 
             if (labels.Count == 0)
             {
@@ -306,6 +326,14 @@ namespace ShippingMark.Controllers
                     var workSheet = package.Workbook.Worksheets.Add("Sheet1");
                     //workSheet.Cells[2,1].LoadFromCollection(list, true);
                     int startRow = 2;
+
+                    int maxValue = 0;
+                    foreach (var l in labels)
+                    {
+                        if (maxValue < l.BuyerCartonNumber)
+                            maxValue = l.BuyerCartonNumber;
+                    }
+
                     foreach (var l in labels)
                     {
                         workSheet.Cells[startRow, 1].Value = "BRAND NAME";
@@ -338,48 +366,38 @@ namespace ShippingMark.Controllers
 
                         List<string> names = new List<string>();
                         if (l.Col00 != 0) names.Add("00");
-                        if (l.Col0 != 0) names.Add("0");
-                        if (l.Col1 != 0) names.Add("1");
-                        if (l.Col2 != 0) names.Add("2");
-                        if (l.Col3 != 0) names.Add("3");
-                        if (l.Col4 != 0) names.Add("4");
-                        if (l.Col5 != 0) names.Add("5");
-                        if (l.Col6 != 0) names.Add("6");
-                        if (l.Col8 != 0) names.Add("8");
-                        if (l.Col10 != 0) names.Add("10");
-                        if (l.Col12 != 0) names.Add("12");
-                        if (l.Col14 != 0) names.Add("14");
-                        if (l.Col16 != 0) names.Add("16");
-                        if (l.Col18 != 0) names.Add("18");
-                        if (l.Col20 != 0) names.Add("20");
-                        if (l.Col22 != 0) names.Add("22");
-                        if (l.Col24 != 0) names.Add("24");
-                        if (l.Col26 != 0) names.Add("26");
-                        if (l.Col28 != 0) names.Add("28");
-                        if (l.Col30 != 0) names.Add("30");
 
+                        //using reflection to loop through all properties in one object
+                        for (int i = 0; i <= 54; i++)
+                        {
+                            var prop = typeof(CartonLabel).GetProperty($"Col{i}");
+                            int objInt = (int)prop.GetValue(l, null);
+                            if (objInt != 0) names.Add($"{i}");
+                        }
+
+                        if (l.SizeXS != 0) names.Add("XS");
+                        if (l.SizeS != 0) names.Add("S");
+                        if (l.SizeM != 0) names.Add("M");
+                        if (l.SizeL != 0) names.Add("L");
+                        if (l.SizeXL != 0) names.Add("XL");
+                        if (l.Size2XL != 0) names.Add("2XL");
 
                         List<int> values = new List<int>();
                         if (l.Col00 != 0) values.Add(l.Col00);
-                        if (l.Col0 != 0) values.Add(l.Col0);
-                        if (l.Col1 != 0) values.Add(l.Col1);
-                        if (l.Col2 != 0) values.Add(l.Col2);
-                        if (l.Col3 != 0) values.Add(l.Col3);
-                        if (l.Col4 != 0) values.Add(l.Col4);
-                        if (l.Col5 != 0) values.Add(l.Col5);
-                        if (l.Col6 != 0) values.Add(l.Col6);
-                        if (l.Col8 != 0) values.Add(l.Col8);
-                        if (l.Col10 != 0) values.Add(l.Col10);
-                        if (l.Col12 != 0) values.Add(l.Col12);
-                        if (l.Col14 != 0) values.Add(l.Col14);
-                        if (l.Col16 != 0) values.Add(l.Col16);
-                        if (l.Col18 != 0) values.Add(l.Col18);
-                        if (l.Col20 != 0) values.Add(l.Col20);
-                        if (l.Col22 != 0) values.Add(l.Col22);
-                        if (l.Col24 != 0) values.Add(l.Col24);
-                        if (l.Col26 != 0) values.Add(l.Col26);
-                        if (l.Col28 != 0) values.Add(l.Col28);
-                        if (l.Col30 != 0) values.Add(l.Col30);
+
+                        for (int i = 0; i <= 54; i++)
+                        {
+                            var prop = typeof(CartonLabel).GetProperty($"Col{i}");
+                            int objInt = (int)prop.GetValue(l, null);
+                            if (objInt != 0) values.Add(objInt);
+                        }
+
+                        if (l.SizeXS != 0) values.Add(l.SizeXS);
+                        if (l.SizeS != 0) values.Add(l.SizeS);
+                        if (l.SizeM != 0) values.Add(l.SizeM);
+                        if (l.SizeL != 0) values.Add(l.SizeL);
+                        if (l.SizeXL != 0) values.Add(l.SizeXL);
+                        if (l.Size2XL != 0) values.Add(l.Size2XL);
 
                         for (int i = 0; i < values.Count(); i++)
                         {
@@ -397,11 +415,11 @@ namespace ShippingMark.Controllers
                         char[] dmsn = l.Dimension.ToUpper().ToCharArray();
                         workSheet.Cells[startRow + 13, 6].Value = $"{dmsn[0]}{dmsn[1]}CM {dmsn[2]} {dmsn[3]}{dmsn[4]}CM {dmsn[5]} {dmsn[6]}{dmsn[7]}CM";
 
-                        workSheet.Cells[startRow + 15, 6].Value = l.CartonNumber.ToString().ToUpper();
+                        workSheet.Cells[startRow + 15, 6].Value = l.BuyerCartonNumber.ToString().ToUpper();
                         workSheet.Cells[startRow + 15, 6].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                         workSheet.Cells[startRow + 15, 6, startRow + 15, 8].Merge = true;
                         workSheet.Cells[startRow + 15, 9].Value = "OF";
-                        workSheet.Cells[startRow + 15, 11].Value = labels.Count.ToString().ToUpper();
+                        workSheet.Cells[startRow + 15, 11].Value = maxValue.ToString();
 
                         for (int i = 0; i <= 17; i++)
                         {

@@ -24,7 +24,7 @@ namespace ShippingMark.Data
                 //            ID = 1,
                 //            CartonNumber = 4,
                 //            BuyerCartonNumber = 1,
-                //            StylePPJ = 2165,
+                //            StylePPJ = "2165",
                 //            Brand = "Torrid",
                 //            Description = "Women's pants",
                 //            Fab = "",

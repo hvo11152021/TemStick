@@ -45,16 +45,31 @@ namespace ShippingMark.Data.SPMigrations
                     b.Property<int>("Col10")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("Col11")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("Col12")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Col13")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Col14")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("Col15")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("Col16")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("Col17")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("Col18")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Col19")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Col2")
@@ -63,16 +78,31 @@ namespace ShippingMark.Data.SPMigrations
                     b.Property<int>("Col20")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("Col21")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("Col22")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Col23")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Col24")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("Col25")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("Col26")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("Col27")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("Col28")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Col29")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Col3")
@@ -81,16 +111,94 @@ namespace ShippingMark.Data.SPMigrations
                     b.Property<int>("Col30")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("Col31")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Col32")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Col33")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Col34")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Col35")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Col36")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Col37")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Col38")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Col39")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("Col4")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Col40")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Col41")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Col42")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Col43")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Col44")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Col45")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Col46")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Col47")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Col48")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Col49")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Col5")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("Col50")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Col51")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Col52")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Col53")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Col54")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("Col6")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("Col7")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("Col8")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Col9")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ColorName")
@@ -106,8 +214,26 @@ namespace ShippingMark.Data.SPMigrations
                     b.Property<string>("Fab")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("StylePPJ")
+                    b.Property<int>("Size2XL")
                         .HasColumnType("INTEGER");
+
+                    b.Property<int>("SizeL")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("SizeM")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("SizeS")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("SizeXL")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("SizeXS")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("StylePPJ")
+                        .HasColumnType("TEXT");
 
                     b.Property<double>("TotalGrossWeight")
                         .HasColumnType("REAL");
