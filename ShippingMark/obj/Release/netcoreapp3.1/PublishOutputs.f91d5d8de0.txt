@@ -1,9 +1,12 @@
 C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Release\netcoreapp3.1\PubTmp\Out\ShippingMark.exe
+C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\css\select_list.css
 C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\css\site.css
+C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\css\transition.css
 C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\example_excel\upload_template.xlsx
 C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\favicon.ico
 C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\img\applying_label_to_shipping_box.webp
 C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\img\sp_logo.png
+C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\img\women_checking_files.jpg
 C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\js\site.js
 C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
 C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Release\netcoreapp3.1\PubTmp\Out\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map

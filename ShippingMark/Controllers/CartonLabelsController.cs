@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Composition;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -18,6 +19,7 @@ using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
 using OfficeOpenXml.Style;
 using ShippingMark.Data;
 using ShippingMark.Models;
+using static OfficeOpenXml.ExcelErrorValue;
 
 namespace ShippingMark.Controllers
 {
@@ -50,6 +52,27 @@ namespace ShippingMark.Controllers
             {
                 return NotFound();
             }
+
+            List<string> names = new List<string>();
+            List<int> values = new List<int>();
+            if (cartonLabel.Col00 != 0)
+            {
+                names.Add("00");
+                values.Add(cartonLabel.Col00);
+            }
+            for (int i = 0; i <= 54; i++)
+            {
+                var prop = typeof(CartonLabel).GetProperty($"Col{i}");
+                int objInt = (int)prop.GetValue(cartonLabel, null);
+                if (objInt != 0)
+                {
+                    names.Add($"{i}");
+                    values.Add(objInt);
+                }
+            }
+
+            ViewData["Names"] = names;
+            ViewData["Values"] = values;
 
             return View(cartonLabel);
         }
@@ -160,6 +183,27 @@ namespace ShippingMark.Controllers
             {
                 return NotFound();
             }
+
+            List<string> names = new List<string>();
+            List<int> values = new List<int>();
+            if (cartonLabel.Col00 != 0)
+            {
+                names.Add("00");
+                values.Add(cartonLabel.Col00);
+            }
+            for (int i = 0; i <= 54; i++)
+            {
+                var prop = typeof(CartonLabel).GetProperty($"Col{i}");
+                int objInt = (int)prop.GetValue(cartonLabel, null);
+                if (objInt != 0)
+                {
+                    names.Add($"{i}");
+                    values.Add(objInt);
+                }
+            }
+
+            ViewData["Names"] = names;
+            ViewData["Values"] = values;
 
             return View(cartonLabel);
         }
@@ -303,9 +347,9 @@ namespace ShippingMark.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         // POST: CartonLabels/DownloadLabels
-        public IActionResult DownloadLabels()
+        public async Task<IActionResult> DownloadLabels()
         {
-            var labels = _context.CartonLabels.OrderBy(l => l.BuyerCartonNumber).ToList();
+            var labels = await _context.CartonLabels.OrderBy(l => l.BuyerCartonNumber).ToListAsync();
 
             if (labels.Count == 0)
             {
@@ -365,14 +409,23 @@ namespace ShippingMark.Controllers
                         workSheet.Cells[startRow + 3, 4].Value = l.ColorName.ToUpper();
 
                         List<string> names = new List<string>();
-                        if (l.Col00 != 0) names.Add("00");
+                        List<int> values = new List<int>();
+                        if (l.Col00 != 0)
+                        {
+                            names.Add("00");
+                            values.Add(l.Col00);
+                        }
 
                         //using reflection to loop through all properties in one object
                         for (int i = 0; i <= 54; i++)
                         {
                             var prop = typeof(CartonLabel).GetProperty($"Col{i}");
                             int objInt = (int)prop.GetValue(l, null);
-                            if (objInt != 0) names.Add($"{i}");
+                            if (objInt != 0)
+                            {
+                                names.Add($"{i}");
+                                values.Add(objInt);
+                            }
                         }
 
                         if (l.SizeXS != 0) names.Add("XS");
@@ -381,16 +434,6 @@ namespace ShippingMark.Controllers
                         if (l.SizeL != 0) names.Add("L");
                         if (l.SizeXL != 0) names.Add("XL");
                         if (l.Size2XL != 0) names.Add("2XL");
-
-                        List<int> values = new List<int>();
-                        if (l.Col00 != 0) values.Add(l.Col00);
-
-                        for (int i = 0; i <= 54; i++)
-                        {
-                            var prop = typeof(CartonLabel).GetProperty($"Col{i}");
-                            int objInt = (int)prop.GetValue(l, null);
-                            if (objInt != 0) values.Add(objInt);
-                        }
 
                         if (l.SizeXS != 0) values.Add(l.SizeXS);
                         if (l.SizeS != 0) values.Add(l.SizeS);
@@ -502,9 +545,9 @@ namespace ShippingMark.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         // POST: CartonLabels/DeleteAll
-        public IActionResult DeleteAll()
+        public async Task<IActionResult> DeleteAll()
         {
-            var labels = _context.CartonLabels.ToList();
+            var labels = await _context.CartonLabels.ToListAsync();
 
             if (labels.Count == 0)
             {
@@ -528,5 +571,6 @@ namespace ShippingMark.Controllers
             TempData["Message"] = deleteMessage;
             return RedirectToAction(nameof(Index));
         }
+
     }
 }
