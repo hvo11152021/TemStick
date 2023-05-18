@@ -39,6 +39,9 @@ namespace ShippingMark.Data.SPMigrations
                     b.Property<int>("Col00")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("Col000")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("Col1")
                         .HasColumnType("INTEGER");
 
@@ -189,7 +192,25 @@ namespace ShippingMark.Data.SPMigrations
                     b.Property<int>("Col54")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("Col55")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Col56")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Col57")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Col58")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Col59")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("Col6")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Col60")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Col7")
@@ -215,6 +236,12 @@ namespace ShippingMark.Data.SPMigrations
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Size2XL")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Size2XS")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Size3XL")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("SizeL")

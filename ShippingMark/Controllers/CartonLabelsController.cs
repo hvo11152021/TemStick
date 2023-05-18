@@ -60,7 +60,7 @@ namespace ShippingMark.Controllers
                 names.Add("00");
                 values.Add(cartonLabel.Col00);
             }
-            for (int i = 0; i <= 54; i++)
+            for (int i = 0; i <= 60; i++)
             {
                 var prop = typeof(CartonLabel).GetProperty($"Col{i}");
                 int objInt = (int)prop.GetValue(cartonLabel, null);
@@ -89,12 +89,13 @@ namespace ShippingMark.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,CartonNumber,BuyerCartonNumber, StylePPJ,Brand,Description,Fab,ColorName," +
-            "Col00,Col0,Col1,Col2,Col3,Col4,Col5,Col6,Col7,Col8,Col9,Col10," +
+            "Col000,Col00,Col0,Col1,Col2,Col3,Col4,Col5,Col6,Col7,Col8,Col9,Col10," +
             "Col11,Col12,Col13,Col14,Col15,Col16,Col17,Col18,Col19,Col20," +
             "Col21,Col22,Col23,Col24,Col25,Col26,Col27,Col28,Col29,Col30," +
             "Col31,Col32,Col33,Col34,Col35,Col36,Col37,Col38,Col39,Col40," +
             "Col41,Col42,Col43,Col44,Col45,Col46,Col47,Col48,Col49,Col50," +
-            "Col51,Col52,Col53,Col54,SizeXS,SizeS,SizeM,SizeL,SizeXL,Size2XL," +
+            "Col51,Col52,Col53,Col54,Col55,Col56,Col57,Col58,Col59,Col60," +
+            "Size2XS,SizeXS,SizeS,SizeM,SizeL,SizeXL,Size2XL,Size3XL," +
             "TotalQuantity,CartonQuantity,TotalPieces,TotalNetWeight,TotalGrossWeight,Dimension")] CartonLabel cartonLabel)
         {
             if (ModelState.IsValid)
@@ -142,7 +143,8 @@ namespace ShippingMark.Controllers
                 l => l.Col21, l => l.Col22, l => l.Col23, l => l.Col24, l => l.Col25, l => l.Col26, l => l.Col27, l => l.Col28, l => l.Col29, l => l.Col30,
                 l => l.Col31, l => l.Col32, l => l.Col33, l => l.Col34, l => l.Col35, l => l.Col36, l => l.Col37, l => l.Col38, l => l.Col39, l => l.Col40,
                 l => l.Col41, l => l.Col42, l => l.Col43, l => l.Col44, l => l.Col45, l => l.Col46, l => l.Col47, l => l.Col48, l => l.Col49, l => l.Col50,
-                l => l.Col51, l => l.Col52, l => l.Col53, l => l.Col54, l => l.SizeXS, l => l.SizeS, l => l.SizeM, l => l.SizeL, l => l.SizeXL, l => l.Size2XL,
+                l => l.Col51, l => l.Col52, l => l.Col53, l => l.Col54, l => l.Col55, l => l.Col56, l => l.Col57, l => l.Col58, l => l.Col59, l => l.Col60,
+                l => l.Size2XS, l => l.SizeXS, l => l.SizeS, l => l.SizeM, l => l.SizeL, l => l.SizeXL, l => l.Size2XL, l => l.Size3XL,
                 l => l.TotalQuantity, l => l.TotalPieces, l => l.TotalNetWeight, l => l.TotalGrossWeight, l => l.Dimension))
             {
                 try
@@ -191,7 +193,7 @@ namespace ShippingMark.Controllers
                 names.Add("00");
                 values.Add(cartonLabel.Col00);
             }
-            for (int i = 0; i <= 54; i++)
+            for (int i = 0; i <= 60; i++)
             {
                 var prop = typeof(CartonLabel).GetProperty($"Col{i}");
                 int objInt = (int)prop.GetValue(cartonLabel, null);
@@ -290,28 +292,31 @@ namespace ShippingMark.Controllers
                     l.Description = workSheet.Cells[row, 8].Text;
                     l.Fab = workSheet.Cells[row, 9].Text;
                     l.ColorName = workSheet.Cells[row, 10].Text;
-                    l.Col00 = ConvertInput(workSheet.Cells[row, 11].Text);
+                    l.Col000 = ConvertInput(workSheet.Cells[row, 11].Text);
+                    l.Col00 = ConvertInput(workSheet.Cells[row, 12].Text);
 
                     //using reflection to loop through all properties in one object
-                    for (int p = 0; p <= 54; p++)
+                    for (int p = 0; p <= 60; p++)
                     {
                         var prop = typeof(CartonLabel).GetProperty($"Col{p}");
-                        prop.SetValue(l, ConvertInput(workSheet.Cells[row, p + 12].Text), null);
+                        prop.SetValue(l, ConvertInput(workSheet.Cells[row, p + 13].Text), null);
                     }
 
-                    l.SizeXS = ConvertInput(workSheet.Cells[row, 67].Text);
-                    l.SizeS = ConvertInput(workSheet.Cells[row, 68].Text);
-                    l.SizeM = ConvertInput(workSheet.Cells[row, 69].Text);
-                    l.SizeL = ConvertInput(workSheet.Cells[row, 70].Text);
-                    l.SizeXL = ConvertInput(workSheet.Cells[row, 71].Text);
-                    l.Size2XL = ConvertInput(workSheet.Cells[row, 72].Text);
+                    l.Size2XS = ConvertInput(workSheet.Cells[row, 74].Text);
+                    l.SizeXS = ConvertInput(workSheet.Cells[row, 75].Text);
+                    l.SizeS = ConvertInput(workSheet.Cells[row, 76].Text);
+                    l.SizeM = ConvertInput(workSheet.Cells[row, 77].Text);
+                    l.SizeL = ConvertInput(workSheet.Cells[row, 78].Text);
+                    l.SizeXL = ConvertInput(workSheet.Cells[row, 79].Text);
+                    l.Size2XL = ConvertInput(workSheet.Cells[row, 80].Text);
+                    l.Size3XL = ConvertInput(workSheet.Cells[row, 81].Text);
 
-                    l.TotalQuantity = ConvertInput(workSheet.Cells[row, 73].Text);
-                    l.CartonQuantity = ConvertInput(workSheet.Cells[row, 74].Text);
-                    l.TotalPieces = ConvertInput(workSheet.Cells[row, 75].Text);
-                    l.TotalNetWeight = ConvertDouble(workSheet.Cells[row, 76].Text);
-                    l.TotalGrossWeight = ConvertDouble(workSheet.Cells[row, 77].Text);
-                    l.Dimension = workSheet.Cells[row, 78].Text;
+                    l.TotalQuantity = ConvertInput(workSheet.Cells[row, 82].Text);
+                    l.CartonQuantity = ConvertInput(workSheet.Cells[row, 83].Text);
+                    l.TotalPieces = ConvertInput(workSheet.Cells[row, 84].Text);
+                    l.TotalNetWeight = ConvertDouble(workSheet.Cells[row, 85].Text);
+                    l.TotalGrossWeight = ConvertDouble(workSheet.Cells[row, 86].Text);
+                    l.Dimension = workSheet.Cells[row, 87].Text;
 
                     if (l.TotalQuantity != 0 &&
                         l.CartonQuantity != 0 &&
@@ -410,6 +415,13 @@ namespace ShippingMark.Controllers
 
                         List<string> names = new List<string>();
                         List<int> values = new List<int>();
+
+                        if (l.Col000 != 0)
+                        {
+                            names.Add("000");
+                            values.Add(l.Col000);
+                        }
+
                         if (l.Col00 != 0)
                         {
                             names.Add("00");
@@ -417,7 +429,7 @@ namespace ShippingMark.Controllers
                         }
 
                         //using reflection to loop through all properties in one object
-                        for (int i = 0; i <= 54; i++)
+                        for (int i = 0; i <= 60; i++)
                         {
                             var prop = typeof(CartonLabel).GetProperty($"Col{i}");
                             int objInt = (int)prop.GetValue(l, null);
@@ -428,19 +440,23 @@ namespace ShippingMark.Controllers
                             }
                         }
 
+                        if (l.Size2XS != 0) names.Add("2XS");
                         if (l.SizeXS != 0) names.Add("XS");
                         if (l.SizeS != 0) names.Add("S");
                         if (l.SizeM != 0) names.Add("M");
                         if (l.SizeL != 0) names.Add("L");
                         if (l.SizeXL != 0) names.Add("XL");
                         if (l.Size2XL != 0) names.Add("2XL");
+                        if (l.Size3XL != 0) names.Add("3XL");
 
+                        if (l.Size2XS != 0) values.Add(l.Size2XS);
                         if (l.SizeXS != 0) values.Add(l.SizeXS);
                         if (l.SizeS != 0) values.Add(l.SizeS);
                         if (l.SizeM != 0) values.Add(l.SizeM);
                         if (l.SizeL != 0) values.Add(l.SizeL);
                         if (l.SizeXL != 0) values.Add(l.SizeXL);
                         if (l.Size2XL != 0) values.Add(l.Size2XL);
+                        if (l.Size3XL != 0) values.Add(l.Size3XL);
 
                         for (int i = 0; i < values.Count(); i++)
                         {

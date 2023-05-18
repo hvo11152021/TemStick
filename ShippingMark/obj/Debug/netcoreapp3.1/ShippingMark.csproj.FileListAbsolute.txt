@@ -368,3 +368,8 @@ C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Debug\netcoreapp3.
 C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Debug\netcoreapp3.1\ShippingMark.dll
 C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Debug\netcoreapp3.1\ShippingMark.pdb
 C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Debug\netcoreapp3.1\ShippingMark.genruntimeconfig.cache
+C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Debug\netcoreapp3.1\staticwebassets\ShippingMark.StaticWebAssets.Pack.cache
+C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.ShippingMark.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.build.ShippingMark.props
+C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.buildMultiTargeting.ShippingMark.props
+C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.buildTransitive.ShippingMark.props

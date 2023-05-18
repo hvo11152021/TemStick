@@ -30,6 +30,7 @@ namespace ShippingMark.Models
         [Display(Name = "Color Name")]
         public string ColorName { get; set; }
 
+        public int Col000 { get; set; }
         public int Col00 { get; set; }
         public int Col0 { get; set; }
         public int Col1 { get; set; }
@@ -86,13 +87,21 @@ namespace ShippingMark.Models
         public int Col52 { get; set; }
         public int Col53 { get; set; }
         public int Col54 { get; set; }
+        public int Col55 { get; set; }
+        public int Col56 { get; set; }
+        public int Col57 { get; set; }
+        public int Col58 { get; set; }
+        public int Col59 { get; set; }
+        public int Col60 { get; set; }
 
+        public int Size2XS { get; set; }
         public int SizeXS { get; set; }
         public int SizeS { get; set; }
         public int SizeM { get; set; }
         public int SizeL { get; set; }
         public int SizeXL { get; set; }
         public int Size2XL { get; set; }
+        public int Size3XL { get; set; }
 
         [Display(Name = "Total Quantity")]
         [Required]
