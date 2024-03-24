@@ -15,10 +15,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Net.Http.Headers;
 using OfficeOpenXml;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Information;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
 using OfficeOpenXml.Style;
 using ShippingMark.Data;
 using ShippingMark.Models;
+using ShippingMark.Utilities;
 using static OfficeOpenXml.ExcelErrorValue;
 
 namespace ShippingMark.Controllers
@@ -33,14 +35,92 @@ namespace ShippingMark.Controllers
         }
 
         // GET: CartonLabels
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string SearchString, int? page, int? pageSizeID, string actionButton, string sortDirection = "asc", string sortField = "Style PPJ")
         {
-            return View(await _context.CartonLabels.OrderBy(l => l.BuyerCartonNumber).ToListAsync());
+            var cartons = from c in _context.CartonLabels
+                          select c;
+
+            //Clear the sort/filter/paging URL Cookie for Controller
+            CookieHelper.CookieSet(HttpContext, ControllerName() + "URL", "", -1);
+
+            //Toggle the Open/Closed state of the collapse depending on if we are filtering
+            ViewData["Filtering"] = ""; //Asume not filtering
+            //Then in each "test" for filtering, add ViewData["Filtering"] = " show" if true;
+
+            //NOTE: make sure this array has matching values to the column headings
+            string[] sortOptions = new[] { "Style PPJ", "Brand" };
+
+            if (!String.IsNullOrEmpty(SearchString))
+            {
+                cartons = cartons.Where(p => p.StylePPJ.ToUpper().Contains(SearchString.ToUpper())
+                                       || p.Brand.ToUpper().Contains(SearchString.ToUpper()));
+                ViewData["Filtering"] = " show";
+            }
+
+            //Before we sort, see if we have called for a change of filtering or sorting
+            if (!String.IsNullOrEmpty(actionButton)) //Form Submitted!
+            {
+                page = 1;//Reset page to start
+
+                if (sortOptions.Contains(actionButton))//Change of sort is requested
+                {
+                    if (actionButton == sortField) //Reverse order on same field
+                    {
+                        sortDirection = sortDirection == "asc" ? "desc" : "asc";
+                    }
+                    sortField = actionButton;//Sort by the button clicked
+                }
+            }
+            //Now we know which field and direction to sort by
+            if (sortField == "Brand")
+            {
+                if (sortDirection == "asc")
+                {
+                    cartons = cartons
+                    .OrderBy(p => p.Brand)
+                        .ThenBy(p => p.StylePPJ);
+                }
+                else
+                {
+                    cartons = cartons
+                        .OrderByDescending(p => p.Brand)
+                        .ThenByDescending(p => p.StylePPJ);
+                }
+            }
+            else //Sorting by Last Name
+            {
+                if (sortDirection == "asc")
+                {
+                    cartons = cartons
+                        .OrderBy(p => p.StylePPJ)
+                        .ThenBy(p => p.Brand);
+                }
+                else
+                {
+                    cartons = cartons
+                        .OrderByDescending(p => p.StylePPJ)
+                        .ThenByDescending(p => p.Brand);
+                }
+            }
+            //Set sort for next time
+            ViewData["sortField"] = sortField;
+            ViewData["sortDirection"] = sortDirection;
+
+            //Handle Paging
+             int pageSize = PageSizeHelper.SetPageSize(HttpContext, pageSizeID);
+            ViewData["pageSizeID"] = PageSizeHelper.PageSizeList(pageSize);
+
+            var pagedData = await PaginatedList<CartonLabel>.CreateAsync(cartons.AsNoTracking(), page ?? 1, pageSize);
+
+            return View(pagedData);
         }
 
         // GET: CartonLabels/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            //URL with the last filter, sort and page parameters for this controller
+            ViewDataReturnURL();
+
             if (id == null || _context.CartonLabels == null)
             {
                 return NotFound();
@@ -55,6 +135,11 @@ namespace ShippingMark.Controllers
 
             List<string> names = new List<string>();
             List<int> values = new List<int>();
+            if (cartonLabel.Col000 != 0)
+            {
+                names.Add("000");
+                values.Add(cartonLabel.Col000);
+            }
             if (cartonLabel.Col00 != 0)
             {
                 names.Add("00");
@@ -70,6 +155,81 @@ namespace ShippingMark.Controllers
                     values.Add(objInt);
                 }
             }
+            if (cartonLabel.Size2XS != 0)
+            {
+                names.Add("XXS");
+                values.Add(cartonLabel.Size2XS);
+            }
+            if (cartonLabel.SizeXS != 0)
+            {
+                names.Add("XS");
+                values.Add(cartonLabel.Size2XS);
+            }
+            if (cartonLabel.SizeS != 0)
+            {
+                names.Add("S");
+                values.Add(cartonLabel.SizeS);
+            }
+            if (cartonLabel.SizeM != 0)
+            {
+                names.Add("M");
+                values.Add(cartonLabel.SizeM);
+            }
+            if (cartonLabel.SizeL != 0)
+            {
+                names.Add("L");
+                values.Add(cartonLabel.SizeL);
+            }
+            if (cartonLabel.SizeXL != 0)
+            {
+                names.Add("XL");
+                values.Add(cartonLabel.SizeXL);
+            }
+            if (cartonLabel.Size2XL != 0)
+            {
+                names.Add("XXL");
+                values.Add(cartonLabel.Size2XL);
+            }
+            if (cartonLabel.Size3XL != 0)
+            {
+                names.Add("3XL");
+                values.Add(cartonLabel.Size3XL);
+            }
+            if (cartonLabel.SizeX1 != 0)
+            {
+                names.Add("X1");
+                values.Add(cartonLabel.SizeX1);
+            }
+            if (cartonLabel.SizeX2 != 0)
+            {
+                names.Add("X2");
+                values.Add(cartonLabel.SizeX2);
+            }
+            if (cartonLabel.SizeX3 != 0)
+            {
+                names.Add("X3");
+                values.Add(cartonLabel.SizeX3);
+            }
+            if (cartonLabel.SizeLL != 0)
+            {
+                names.Add("LL");
+                values.Add(cartonLabel.SizeLL);
+            }
+            if (cartonLabel.Size3L != 0)
+            {
+                names.Add("3L");
+                values.Add(cartonLabel.Size3L);
+            }
+            if (cartonLabel.Size4L != 0)
+            {
+                names.Add("4L");
+                values.Add(cartonLabel.Size4L);
+            }
+            if (cartonLabel.Size5L != 0)
+            {
+                names.Add("5L");
+                values.Add(cartonLabel.Size5L);
+            }
 
             ViewData["Names"] = names;
             ViewData["Values"] = values;
@@ -80,6 +240,9 @@ namespace ShippingMark.Controllers
         // GET: CartonLabels/Create
         public IActionResult Create()
         {
+            //URL with the last filter, sort and page parameters for this controller
+            ViewDataReturnURL();
+
             return View();
         }
 
@@ -95,9 +258,12 @@ namespace ShippingMark.Controllers
             "Col31,Col32,Col33,Col34,Col35,Col36,Col37,Col38,Col39,Col40," +
             "Col41,Col42,Col43,Col44,Col45,Col46,Col47,Col48,Col49,Col50," +
             "Col51,Col52,Col53,Col54,Col55,Col56,Col57,Col58,Col59,Col60," +
-            "Size2XS,SizeXS,SizeS,SizeM,SizeL,SizeXL,Size2XL,Size3XL," +
+            "Size2XS,SizeXS,SizeS,SizeM,SizeL,SizeXL,Size2XL,Size3XL,SizeX1,SizeX2,SizeX3,SizeLL,Size3L,Size4L,Size5L," +
             "TotalQuantity,CartonQuantity,TotalPieces,TotalNetWeight,TotalGrossWeight,Dimension")] CartonLabel cartonLabel)
         {
+            //URL with the last filter, sort and page parameters for this controller
+            ViewDataReturnURL();
+
             if (ModelState.IsValid)
             {
                 _context.Add(cartonLabel);
@@ -110,6 +276,9 @@ namespace ShippingMark.Controllers
         // GET: CartonLabels/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            //URL with the last filter, sort and page parameters for this controller
+            ViewDataReturnURL();
+
             if (id == null || _context.CartonLabels == null)
             {
                 return NotFound();
@@ -130,6 +299,9 @@ namespace ShippingMark.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id)
         {
+            //URL with the last filter, sort and page parameters for this controller
+            ViewDataReturnURL();
+
             var labelToUpdate = await _context.CartonLabels.SingleOrDefaultAsync(l => l.ID == id);
 
             if (labelToUpdate == null)
@@ -145,6 +317,7 @@ namespace ShippingMark.Controllers
                 l => l.Col41, l => l.Col42, l => l.Col43, l => l.Col44, l => l.Col45, l => l.Col46, l => l.Col47, l => l.Col48, l => l.Col49, l => l.Col50,
                 l => l.Col51, l => l.Col52, l => l.Col53, l => l.Col54, l => l.Col55, l => l.Col56, l => l.Col57, l => l.Col58, l => l.Col59, l => l.Col60,
                 l => l.Size2XS, l => l.SizeXS, l => l.SizeS, l => l.SizeM, l => l.SizeL, l => l.SizeXL, l => l.Size2XL, l => l.Size3XL,
+                l => l.SizeX1, l => l.SizeX2, l => l.SizeX3, l => l.SizeLL, l => l.Size3L, l => l.Size4L, l => l.Size5L,
                 l => l.TotalQuantity, l => l.TotalPieces, l => l.TotalNetWeight, l => l.TotalGrossWeight, l => l.Dimension))
             {
                 try
@@ -174,6 +347,9 @@ namespace ShippingMark.Controllers
         // GET: CartonLabels/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            //URL with the last filter, sort and page parameters for this controller
+            ViewDataReturnURL();
+
             if (id == null || _context.CartonLabels == null)
             {
                 return NotFound();
@@ -188,6 +364,11 @@ namespace ShippingMark.Controllers
 
             List<string> names = new List<string>();
             List<int> values = new List<int>();
+            if (cartonLabel.Col000 != 0)
+            {
+                names.Add("000");
+                values.Add(cartonLabel.Col000);
+            }
             if (cartonLabel.Col00 != 0)
             {
                 names.Add("00");
@@ -203,6 +384,81 @@ namespace ShippingMark.Controllers
                     values.Add(objInt);
                 }
             }
+            if (cartonLabel.Size2XS != 0)
+            {
+                names.Add("XXS");
+                values.Add(cartonLabel.Size2XS);
+            }
+            if (cartonLabel.SizeXS != 0)
+            {
+                names.Add("XS");
+                values.Add(cartonLabel.Size2XS);
+            }
+            if (cartonLabel.SizeS != 0)
+            {
+                names.Add("S");
+                values.Add(cartonLabel.SizeS);
+            }
+            if (cartonLabel.SizeM != 0)
+            {
+                names.Add("M");
+                values.Add(cartonLabel.SizeM);
+            }
+            if (cartonLabel.SizeL != 0)
+            {
+                names.Add("L");
+                values.Add(cartonLabel.SizeL);
+            }
+            if (cartonLabel.SizeXL != 0)
+            {
+                names.Add("XL");
+                values.Add(cartonLabel.SizeXL);
+            }
+            if (cartonLabel.Size2XL != 0)
+            {
+                names.Add("XXL");
+                values.Add(cartonLabel.Size2XL);
+            }
+            if (cartonLabel.Size3XL != 0)
+            {
+                names.Add("3XL");
+                values.Add(cartonLabel.Size3XL);
+            }
+            if (cartonLabel.SizeX1 != 0)
+            {
+                names.Add("X1");
+                values.Add(cartonLabel.SizeX1);
+            }
+            if (cartonLabel.SizeX2 != 0)
+            {
+                names.Add("X2");
+                values.Add(cartonLabel.SizeX2);
+            }
+            if (cartonLabel.SizeX3 != 0)
+            {
+                names.Add("X3");
+                values.Add(cartonLabel.SizeX3);
+            }
+            if (cartonLabel.SizeLL != 0)
+            {
+                names.Add("LL");
+                values.Add(cartonLabel.SizeLL);
+            }
+            if (cartonLabel.Size3L != 0)
+            {
+                names.Add("3L");
+                values.Add(cartonLabel.Size3L);
+            }
+            if (cartonLabel.Size4L != 0)
+            {
+                names.Add("4L");
+                values.Add(cartonLabel.Size4L);
+            }
+            if (cartonLabel.Size5L != 0)
+            {
+                names.Add("5L");
+                values.Add(cartonLabel.Size5L);
+            }
 
             ViewData["Names"] = names;
             ViewData["Values"] = values;
@@ -215,6 +471,9 @@ namespace ShippingMark.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            //URL with the last filter, sort and page parameters for this controller
+            ViewDataReturnURL();
+
             if (_context.CartonLabels == null)
             {
                 return Problem("Entity set 'ShippingContext.CartonLabels'  is null.");
@@ -311,12 +570,21 @@ namespace ShippingMark.Controllers
                     l.Size2XL = ConvertInput(workSheet.Cells[row, 80].Text);
                     l.Size3XL = ConvertInput(workSheet.Cells[row, 81].Text);
 
-                    l.TotalQuantity = ConvertInput(workSheet.Cells[row, 82].Text);
-                    l.CartonQuantity = ConvertInput(workSheet.Cells[row, 83].Text);
-                    l.TotalPieces = ConvertInput(workSheet.Cells[row, 84].Text);
-                    l.TotalNetWeight = ConvertDouble(workSheet.Cells[row, 85].Text);
-                    l.TotalGrossWeight = ConvertDouble(workSheet.Cells[row, 86].Text);
-                    l.Dimension = workSheet.Cells[row, 87].Text;
+                    l.SizeX = ConvertInput(workSheet.Cells[row, 82].Text);
+                    l.SizeX1 = ConvertInput(workSheet.Cells[row, 83].Text);
+                    l.SizeX2 = ConvertInput(workSheet.Cells[row, 84].Text);
+                    l.SizeX3 = ConvertInput(workSheet.Cells[row, 85].Text);
+                    l.SizeLL = ConvertInput(workSheet.Cells[row, 86].Text);
+                    l.Size3L = ConvertInput(workSheet.Cells[row, 87].Text);
+                    l.Size4L = ConvertInput(workSheet.Cells[row, 88].Text);
+                    l.Size5L = ConvertInput(workSheet.Cells[row, 89].Text);
+
+                    l.TotalQuantity = ConvertInput(workSheet.Cells[row, 90].Text);
+                    l.CartonQuantity = ConvertInput(workSheet.Cells[row, 91].Text);
+                    l.TotalPieces = ConvertInput(workSheet.Cells[row, 92].Text);
+                    l.TotalNetWeight = ConvertDouble(workSheet.Cells[row, 93].Text);
+                    l.TotalGrossWeight = ConvertDouble(workSheet.Cells[row, 94].Text);
+                    l.Dimension = workSheet.Cells[row, 95].Text;
 
                     if (l.TotalQuantity != 0 &&
                         l.CartonQuantity != 0 &&
@@ -458,6 +726,24 @@ namespace ShippingMark.Controllers
                         if (l.Size2XL != 0) values.Add(l.Size2XL);
                         if (l.Size3XL != 0) values.Add(l.Size3XL);
 
+                        if (l.SizeX != 0) names.Add("X");
+                        if (l.SizeX1 != 0) names.Add("X1");
+                        if (l.SizeX2 != 0) names.Add("X2");
+                        if (l.SizeX3 != 0) names.Add("X3");
+                        if (l.SizeLL != 0) names.Add("LL");
+                        if (l.Size3L != 0) names.Add("3L");
+                        if (l.Size4L != 0) names.Add("4L");
+                        if (l.Size5L != 0) names.Add("5L");
+
+                        if (l.SizeX != 0) values.Add(l.SizeX);
+                        if (l.SizeX1 != 0) values.Add(l.SizeX1);
+                        if (l.SizeX2 != 0) values.Add(l.SizeX2);
+                        if (l.SizeX3 != 0) values.Add(l.SizeX3);
+                        if (l.SizeLL != 0) values.Add(l.SizeLL);
+                        if (l.Size3L != 0) values.Add(l.Size3L);
+                        if (l.Size4L != 0) values.Add(l.Size4L);
+                        if (l.Size5L != 0) values.Add(l.Size5L);
+
                         for (int i = 0; i < values.Count(); i++)
                         {
                             workSheet.Cells[startRow + 4, i + 4].Value = names.ElementAt(i);
@@ -587,6 +873,16 @@ namespace ShippingMark.Controllers
             TempData["Message"] = deleteMessage;
             return RedirectToAction(nameof(Index));
         }
+
+        private string ControllerName()
+        {
+            return this.ControllerContext.RouteData.Values["controller"].ToString();
+        }
+        private void ViewDataReturnURL()
+        {
+            ViewData["returnURL"] = MaintainURL.ReturnURL(HttpContext, ControllerName());
+        }
+
 
     }
 }

@@ -364,7 +364,6 @@ C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Debug\netcoreapp3.
 C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Debug\netcoreapp3.1\ShippingMark.RazorTargetAssemblyInfo.cache
 C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Debug\netcoreapp3.1\ShippingMark.RazorTargetAssemblyInfo.cs
 C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Debug\netcoreapp3.1\ShippingMark.Views.pdb
-C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Debug\netcoreapp3.1\ShippingMark.csproj.CopyComplete
 C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Debug\netcoreapp3.1\ShippingMark.dll
 C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Debug\netcoreapp3.1\ShippingMark.pdb
 C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Debug\netcoreapp3.1\ShippingMark.genruntimeconfig.cache
@@ -373,3 +372,7 @@ C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Debug\netcoreapp3.
 C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.build.ShippingMark.props
 C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.buildMultiTargeting.ShippingMark.props
 C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.buildTransitive.ShippingMark.props
+C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Debug\netcoreapp3.1\ShippingMark.sourcelink.json
+C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Debug\netcoreapp3.1\Shipping.8C9A3BB0.Up2Date
+C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_PageSizeModal.cshtml.g.cs
+C:\Users\vogia\Documents\GitHub\ShippingMark\ShippingMark\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_PagingNavBar.cshtml.g.cs

@@ -8,7 +8,7 @@ using ShippingMark.Data;
 namespace ShippingMark.Data.SPMigrations
 {
     [DbContext(typeof(ShippingContext))]
-    [Migration("20230517012749_Initial")]
+    [Migration("20231210234356_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -243,16 +243,40 @@ namespace ShippingMark.Data.SPMigrations
                     b.Property<int>("Size2XS")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("Size3L")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("Size3XL")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("Size4L")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Size5L")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("SizeL")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("SizeLL")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("SizeM")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("SizeS")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("SizeX")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("SizeX1")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("SizeX2")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("SizeX3")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("SizeXL")

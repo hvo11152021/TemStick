@@ -493,6 +493,13 @@
                     </div>
                     <div class="col-md-1">
                         <div class="form-group">
+                            <label asp-for="Size2XS" class="control-label"></label>
+                            <input asp-for="Size2XS" value="0" class="form-control" />
+                            <span asp-validation-for="Size2XS" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
                             <label asp-for="SizeXS" class="control-label"></label>
                             <input asp-for="SizeXS" value="0" class="form-control" />
                             <span asp-validation-for="SizeXS" class="text-danger"></span>
@@ -531,6 +538,62 @@
                             <label asp-for="Size2XL" class="control-label"></label>
                             <input asp-for="Size2XL" value="0" class="form-control" />
                             <span asp-validation-for="Size2XL" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label asp-for="Size3XL" class="control-label"></label>
+                            <input asp-for="Size3XL" value="0" class="form-control" />
+                            <span asp-validation-for="Size3XL" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label asp-for="SizeX1" class="control-label"></label>
+                            <input asp-for="SizeX1" value="0" class="form-control" />
+                            <span asp-validation-for="SizeX1" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label asp-for="SizeX2" class="control-label"></label>
+                            <input asp-for="SizeX2" value="0" class="form-control" />
+                            <span asp-validation-for="SizeX2" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label asp-for="SizeX3" class="control-label"></label>
+                            <input asp-for="SizeX3" value="0" class="form-control" />
+                            <span asp-validation-for="SizeX3" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label asp-for="SizeLL" class="control-label"></label>
+                            <input asp-for="SizeLL" value="0" class="form-control" />
+                            <span asp-validation-for="SizeLL" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label asp-for="Size3L" class="control-label"></label>
+                            <input asp-for="Size3L" value="0" class="form-control" />
+                            <span asp-validation-for="Size3L" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label asp-for="Size4L" class="control-label"></label>
+                            <input asp-for="Size4L" value="0" class="form-control" />
+                            <span asp-validation-for="Size4L" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label asp-for="Size5L" class="control-label"></label>
+                            <input asp-for="Size5L" value="0" class="form-control" />
+                            <span asp-validation-for="Size5L" class="text-danger"></span>
                         </div>
                     </div>
                 </tr>
@@ -584,7 +647,7 @@
     </form>
 
     <div>
-        <a asp-action="Index">Back to List</a>
+        <a href='@ViewData["returnURL"]'>Back to List</a>
     </div>
 </div>
 

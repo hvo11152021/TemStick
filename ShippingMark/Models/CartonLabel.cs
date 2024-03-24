@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Xml.Linq;
+//using System.Xml.Linq;
 
 namespace ShippingMark.Models
 {
@@ -102,6 +102,15 @@ namespace ShippingMark.Models
         public int SizeXL { get; set; }
         public int Size2XL { get; set; }
         public int Size3XL { get; set; }
+
+        public int SizeX { get; set; }
+        public int SizeX1 { get; set; }
+        public int SizeX2 { get; set; }
+        public int SizeX3 { get; set; }
+        public int SizeLL { get; set; }
+        public int Size3L { get; set; }
+        public int Size4L { get; set; }
+        public int Size5L { get; set; }
 
         [Display(Name = "Total Quantity")]
         [Required]
