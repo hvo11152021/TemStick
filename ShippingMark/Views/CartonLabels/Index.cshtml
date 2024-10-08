@@ -14,7 +14,7 @@
 <p class="text-danger">@TempData["Message"]</p>
 <p class="text-success">@TempData["Success"]</p>
 
-<!--<div class="transition_container">
+<div class="transition_container">
     <div class="row m-0">
         <div class="card mb-3 mr-3 shadow mb-5 bg-body rounded">
             <div class="card-header"></div>
@@ -37,7 +37,7 @@
                 </form>
             </div>
         </div>
-    </div>-->
+    </div>
 
     <form asp-action="Index" method="get">
         <input type="hidden" name="sortDirection" value="@ViewData["sortDirection"]" />
@@ -156,11 +156,11 @@
         </table>
         <partial name="_PagingNavBar" />
     </form>
-    <!--<form asp-action="DeleteAll" asp-controller="CartonLabels">
+    <form asp-action="DeleteAll" asp-controller="CartonLabels">
         <div class="d-none d-lg-block">
             <button type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('This action will delete all records. Are you willing to proceed? ')">
                 @*<i class="fa fa-trash-o"></i> *@Delete All
             </button>
         </div>
     </form>
-    </div>-->
+    </div>

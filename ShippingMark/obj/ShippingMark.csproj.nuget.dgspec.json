@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\vogia\\Documents\\GitHub\\ShippingMark\\ShippingMark\\ShippingMark.csproj": {}
+    "C:\\Users\\Hy\\Documents\\GitHub\\ShippingMark\\ShippingMark\\ShippingMark.csproj": {}
   },
   "projects": {
-    "C:\\Users\\vogia\\Documents\\GitHub\\ShippingMark\\ShippingMark\\ShippingMark.csproj": {
+    "C:\\Users\\Hy\\Documents\\GitHub\\ShippingMark\\ShippingMark\\ShippingMark.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vogia\\Documents\\GitHub\\ShippingMark\\ShippingMark\\ShippingMark.csproj",
+        "projectUniqueName": "C:\\Users\\Hy\\Documents\\GitHub\\ShippingMark\\ShippingMark\\ShippingMark.csproj",
         "projectName": "ShippingMark",
-        "projectPath": "C:\\Users\\vogia\\Documents\\GitHub\\ShippingMark\\ShippingMark\\ShippingMark.csproj",
-        "packagesPath": "C:\\Users\\vogia\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vogia\\Documents\\GitHub\\ShippingMark\\ShippingMark\\obj\\",
+        "projectPath": "C:\\Users\\Hy\\Documents\\GitHub\\ShippingMark\\ShippingMark\\ShippingMark.csproj",
+        "packagesPath": "C:\\Users\\Hy\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Hy\\Documents\\GitHub\\ShippingMark\\ShippingMark\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\vogia\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Hy\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -96,7 +92,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

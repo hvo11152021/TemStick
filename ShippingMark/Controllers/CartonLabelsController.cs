@@ -1,27 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Composition;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.ConstrainedExecution;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Net.Http.Headers;
 using OfficeOpenXml;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Information;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
 using OfficeOpenXml.Style;
 using ShippingMark.Data;
 using ShippingMark.Models;
 using ShippingMark.Utilities;
-using static OfficeOpenXml.ExcelErrorValue;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ShippingMark.Controllers
 {
@@ -64,43 +53,19 @@ namespace ShippingMark.Controllers
 
                 if (sortOptions.Contains(actionButton))//Change of sort is requested
                 {
-                    if (actionButton == sortField) //Reverse order on same field
-                    {
-                        sortDirection = sortDirection == "asc" ? "desc" : "asc";
-                    }
+                    //Reverse order on same field
+                    if (actionButton == sortField) sortDirection = sortDirection == "asc" ? "desc" : "asc";
                     sortField = actionButton;//Sort by the button clicked
                 }
             }
             //Now we know which field and direction to sort by
             if (sortField == "Brand")
             {
-                if (sortDirection == "asc")
-                {
-                    cartons = cartons
-                    .OrderBy(p => p.Brand)
-                        .ThenBy(p => p.StylePPJ);
-                }
-                else
-                {
-                    cartons = cartons
-                        .OrderByDescending(p => p.Brand)
-                        .ThenByDescending(p => p.StylePPJ);
-                }
+                cartons = sortDirection == "asc" ? cartons.OrderBy(p => p.Brand).ThenBy(p => p.StylePPJ) : cartons = cartons.OrderByDescending(p => p.Brand).ThenByDescending(p => p.StylePPJ);
             }
             else //Sorting by Last Name
             {
-                if (sortDirection == "asc")
-                {
-                    cartons = cartons
-                        .OrderBy(p => p.StylePPJ)
-                        .ThenBy(p => p.Brand);
-                }
-                else
-                {
-                    cartons = cartons
-                        .OrderByDescending(p => p.StylePPJ)
-                        .ThenByDescending(p => p.Brand);
-                }
+                cartons = sortDirection == "asc" ? cartons.OrderBy(p => p.StylePPJ).ThenBy(p => p.Brand) : cartons.OrderByDescending(p => p.StylePPJ).ThenByDescending(p => p.Brand);
             }
             //Set sort for next time
             ViewData["sortField"] = sortField;
@@ -121,30 +86,23 @@ namespace ShippingMark.Controllers
             //URL with the last filter, sort and page parameters for this controller
             ViewDataReturnURL();
 
-            if (id == null || _context.CartonLabels == null)
-            {
-                return NotFound();
-            }
+            if (id == null || _context.CartonLabels == null) NotFound();
 
-            var cartonLabel = await _context.CartonLabels
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (cartonLabel == null)
-            {
-                return NotFound();
-            }
+            var cartonLabel = await _context.CartonLabels.FirstOrDefaultAsync(m => m.ID == id);
+
+            if (cartonLabel == null) NotFound();
 
             List<string> names = new List<string>();
             List<int> values = new List<int>();
-            if (cartonLabel.Col000 != 0)
+
+            void SetNamesAndValues(string n, int v)
             {
-                names.Add("000");
-                values.Add(cartonLabel.Col000);
+                names.Add(n);
+                values.Add(v);
             }
-            if (cartonLabel.Col00 != 0)
-            {
-                names.Add("00");
-                values.Add(cartonLabel.Col00);
-            }
+
+            if (cartonLabel.Col000 != 0) SetNamesAndValues("000", cartonLabel.Col000);
+            if (cartonLabel.Col00 != 0) SetNamesAndValues("00", cartonLabel.Col00);
             for (int i = 0; i <= 60; i++)
             {
                 var prop = typeof(CartonLabel).GetProperty($"Col{i}");
@@ -155,80 +113,28 @@ namespace ShippingMark.Controllers
                     values.Add(objInt);
                 }
             }
-            if (cartonLabel.Size2XS != 0)
+
+            var sizes = new List<(string n, int v)>{
+                ("XXS", cartonLabel.Size2XS),
+                ("XS", cartonLabel.SizeXS),
+                ("S", cartonLabel.SizeS),
+                ("M", cartonLabel.SizeM),
+                ("L", cartonLabel.SizeL),
+                ("XL", cartonLabel.SizeXL),
+                ("XXL", cartonLabel.Size2XL),
+                ("3XL", cartonLabel.Size3XL),
+                ("X1", cartonLabel.SizeX1),
+                ("X2", cartonLabel.SizeX2),
+                ("X3", cartonLabel.SizeX3),
+                ("LL", cartonLabel.SizeLL),
+                ("3L", cartonLabel.Size3L),
+                ("4L", cartonLabel.Size4L),
+                ("5L", cartonLabel.Size5L)
+            };
+
+            foreach (var size in sizes)
             {
-                names.Add("XXS");
-                values.Add(cartonLabel.Size2XS);
-            }
-            if (cartonLabel.SizeXS != 0)
-            {
-                names.Add("XS");
-                values.Add(cartonLabel.Size2XS);
-            }
-            if (cartonLabel.SizeS != 0)
-            {
-                names.Add("S");
-                values.Add(cartonLabel.SizeS);
-            }
-            if (cartonLabel.SizeM != 0)
-            {
-                names.Add("M");
-                values.Add(cartonLabel.SizeM);
-            }
-            if (cartonLabel.SizeL != 0)
-            {
-                names.Add("L");
-                values.Add(cartonLabel.SizeL);
-            }
-            if (cartonLabel.SizeXL != 0)
-            {
-                names.Add("XL");
-                values.Add(cartonLabel.SizeXL);
-            }
-            if (cartonLabel.Size2XL != 0)
-            {
-                names.Add("XXL");
-                values.Add(cartonLabel.Size2XL);
-            }
-            if (cartonLabel.Size3XL != 0)
-            {
-                names.Add("3XL");
-                values.Add(cartonLabel.Size3XL);
-            }
-            if (cartonLabel.SizeX1 != 0)
-            {
-                names.Add("X1");
-                values.Add(cartonLabel.SizeX1);
-            }
-            if (cartonLabel.SizeX2 != 0)
-            {
-                names.Add("X2");
-                values.Add(cartonLabel.SizeX2);
-            }
-            if (cartonLabel.SizeX3 != 0)
-            {
-                names.Add("X3");
-                values.Add(cartonLabel.SizeX3);
-            }
-            if (cartonLabel.SizeLL != 0)
-            {
-                names.Add("LL");
-                values.Add(cartonLabel.SizeLL);
-            }
-            if (cartonLabel.Size3L != 0)
-            {
-                names.Add("3L");
-                values.Add(cartonLabel.Size3L);
-            }
-            if (cartonLabel.Size4L != 0)
-            {
-                names.Add("4L");
-                values.Add(cartonLabel.Size4L);
-            }
-            if (cartonLabel.Size5L != 0)
-            {
-                names.Add("5L");
-                values.Add(cartonLabel.Size5L);
+                if (size.v != 0) SetNamesAndValues(size.n, size.v);
             }
 
             ViewData["Names"] = names;
@@ -242,7 +148,6 @@ namespace ShippingMark.Controllers
         {
             //URL with the last filter, sort and page parameters for this controller
             ViewDataReturnURL();
-
             return View();
         }
 
@@ -279,16 +184,10 @@ namespace ShippingMark.Controllers
             //URL with the last filter, sort and page parameters for this controller
             ViewDataReturnURL();
 
-            if (id == null || _context.CartonLabels == null)
-            {
-                return NotFound();
-            }
+            if (id == null || _context.CartonLabels == null) NotFound();
 
             var cartonLabel = await _context.CartonLabels.FindAsync(id);
-            if (cartonLabel == null)
-            {
-                return NotFound();
-            }
+            if (cartonLabel == null) NotFound();
             return View(cartonLabel);
         }
 
@@ -304,10 +203,7 @@ namespace ShippingMark.Controllers
 
             var labelToUpdate = await _context.CartonLabels.SingleOrDefaultAsync(l => l.ID == id);
 
-            if (labelToUpdate == null)
-            {
-                return NotFound();
-            }
+            if (labelToUpdate == null) NotFound();
 
             if (await TryUpdateModelAsync(labelToUpdate, "", l => l.CartonNumber, l => l.BuyerCartonNumber, l => l.StylePPJ, l => l.Brand, l => l.Description, l => l.Fab, l => l.ColorName,
                 l => l.Col00, l => l.Col0, l => l.Col1, l => l.Col2, l => l.Col3, l => l.Col4, l => l.Col5, l => l.Col6, l => l.Col7, l => l.Col8, l => l.Col9, l => l.Col10,
@@ -350,17 +246,11 @@ namespace ShippingMark.Controllers
             //URL with the last filter, sort and page parameters for this controller
             ViewDataReturnURL();
 
-            if (id == null || _context.CartonLabels == null)
-            {
-                return NotFound();
-            }
+            if (id == null || _context.CartonLabels == null) NotFound();
 
-            var cartonLabel = await _context.CartonLabels
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (cartonLabel == null)
-            {
-                return NotFound();
-            }
+            var cartonLabel = await _context.CartonLabels.FirstOrDefaultAsync(m => m.ID == id);
+
+            if (cartonLabel == null) NotFound();
 
             List<string> names = new List<string>();
             List<int> values = new List<int>();
@@ -647,8 +537,7 @@ namespace ShippingMark.Controllers
                     int maxValue = 0;
                     foreach (var l in labels)
                     {
-                        if (maxValue < l.BuyerCartonNumber)
-                            maxValue = l.BuyerCartonNumber;
+                        if (maxValue < l.BuyerCartonNumber) maxValue = l.BuyerCartonNumber;
                     }
 
                     foreach (var l in labels)
@@ -874,15 +763,11 @@ namespace ShippingMark.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private string ControllerName()
-        {
-            return this.ControllerContext.RouteData.Values["controller"].ToString();
-        }
+        private string ControllerName() => this.ControllerContext.RouteData.Values["controller"].ToString();
+
         private void ViewDataReturnURL()
         {
             ViewData["returnURL"] = MaintainURL.ReturnURL(HttpContext, ControllerName());
         }
-
-
     }
 }
