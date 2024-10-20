@@ -1,6 +1,0 @@
-﻿Add-Migration -Context ShippingContext -o Data\SPMigrations Initial
-Update-Database -Context ApplicationDbContext
-Update-Database -Context ShippingContext
-
-ExtraMigration.Steps(migrationBuilder);
-
