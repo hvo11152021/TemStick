@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://hyshippingmark.azurewebsites.net/">
-    <img src="ShippingMark/wwwroot/img/sp_logo.png" alt="Logo" width="150" height="99">
+    <img src="ShippingMark/wwwroot/img/main_logo.png" alt="Logo" width="150" height="99">
   </a>
 
   <h1 align="center">Shipping Mark</h1>
