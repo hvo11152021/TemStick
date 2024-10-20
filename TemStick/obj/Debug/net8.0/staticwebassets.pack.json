@@ -1,0 +1,193 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\css\\select_list.css",
+      "PackagePath": "staticwebassets\\css\\select_list.css"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\css\\transition.css",
+      "PackagePath": "staticwebassets\\css\\transition.css"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\example_excel\\upload_template.xlsx",
+      "PackagePath": "staticwebassets\\example_excel\\upload_template.xlsx"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\img\\applying_label_to_shipping_box.webp",
+      "PackagePath": "staticwebassets\\img\\applying_label_to_shipping_box.webp"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\img\\main_logo.png",
+      "PackagePath": "staticwebassets\\img\\main_logo.png"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\img\\sp_logo.png",
+      "PackagePath": "staticwebassets\\img\\sp_logo.png"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\img\\women_checking_files.jpg",
+      "PackagePath": "staticwebassets\\img\\women_checking_files.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Hy\\Documents\\GitHub\\TemStick\\TemStick\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.TemStick.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.TemStick.props",
+      "PackagePath": "build\\TemStick.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.TemStick.props",
+      "PackagePath": "buildMultiTargeting\\TemStick.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.TemStick.props",
+      "PackagePath": "buildTransitive\\TemStick.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
