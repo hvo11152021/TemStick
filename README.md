@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="https://hyshippingmark.azurewebsites.net/">
+  <a href="">
     <img src="TemStick/wwwroot/img/main_logo.png" alt="Logo" width="150" height="99">
   </a>
 
