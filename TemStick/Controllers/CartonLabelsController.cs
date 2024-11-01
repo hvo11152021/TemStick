@@ -415,6 +415,10 @@ namespace TemStick.Controllers
             int i = 0;//Counter for inserted records
             int j = 0;//Counter for duplicates
 
+            // If you use EPPlus in a noncommercial context
+            // according to the Polyform Noncommercial license:
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
             try
             {
                 ExcelPackage excel;
